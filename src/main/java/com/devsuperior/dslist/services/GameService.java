@@ -17,12 +17,17 @@ public class GameService {
 	private GameRepository gameRepository;
 		
 	@Transactional(readOnly = true)
-	public List<GameMinDTO> fidnAll() {
+	public List<GameMinDTO> findAll() {
 		return gameRepository.findAll().stream().map(e -> new GameMinDTO(e)).toList();
 	}
 	
 	@Transactional(readOnly = true)
 	public GameDTO findById(Long id) {
 		return new GameDTO(gameRepository.findById(id).get());
+	}
+	
+	@Transactional(readOnly = true)
+	public List<GameMinDTO> findByList(Long listId) {
+		return gameRepository.searchByList(listId).stream().map(e -> new GameMinDTO(e)).toList();
 	}
 }
